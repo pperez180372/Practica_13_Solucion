@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -373,12 +374,12 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             public void run() {
                 TextView ll = (TextView) findViewById(R.id.TextViewEstado);
-                if (ll != null) ll.setText(cad);
+                if (ll != null) ll.append(cad);
+                ScrollView ll1 = (ScrollView) findViewById(R.id.scrollView);
+                if (ll1 !=null) ll1.fullScroll(View.FOCUS_DOWN);
+            }});
+     }
 
-
-            }
-        });
-    }
 
     public void imprimirln(final String cad) {
         imprimir(cad + "\r\n");
@@ -584,7 +585,7 @@ public class MainActivity extends AppCompatActivity {
                         for(int i = 0; i <  jArrayattr.length(); i++) {
                             try {
                                 JSONObject ca = jArrayattr.getJSONObject(i);
-
+                                imprimirln(""+ca.getString("name").contains(nameattribute));
                                 if (ca.getString("name").contains(nameattribute)) {
 
                                     final double va = ca.getDouble("value");
