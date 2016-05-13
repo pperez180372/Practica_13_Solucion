@@ -63,7 +63,7 @@
 
 
 
-                    <EditText
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Fred del caloret"
@@ -146,6 +146,20 @@
                         android:background="#ffffff" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:showDividers="middle">
+
+                    <Button  android:layout_width="wrap_content"    android:layout_weight="1"
+                        android:layout_height="wrap_content"   android:text="Actualiza" android:id="@+id/buttonActualize" />
+                    <Button  android:layout_width="wrap_content"  android:layout_weight="1"
+                        android:layout_height="wrap_content"   android:text="Subs"   android:id="@+id/buttonSubscribe" />
+                    <Button    android:layout_width="wrap_content"  android:layout_weight="1"
+                        android:layout_height="wrap_content"  android:text="Unsubs"   android:id="@+id/buttonUnsubscribe" />
+
+                </LinearLayout>
                 <FrameLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -190,6 +204,7 @@
                         android:background="#ffffff" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
@@ -197,13 +212,13 @@
                     android:showDividers="middle">
 
                     <Button  android:layout_width="wrap_content"    android:layout_weight="1"
-                        android:layout_height="wrap_content"   android:text="LED1" android:id="@+id/button" />
+                        android:layout_height="wrap_content"   android:text="LED1" android:id="@+id/buttonLED1" />
                     <Button  android:layout_width="wrap_content"  android:layout_weight="1"
-                        android:layout_height="wrap_content"   android:text="LED2"   android:id="@+id/button2" />
+                        android:layout_height="wrap_content"   android:text="LED2"   android:id="@+id/buttonLED2" />
                     <Button    android:layout_width="wrap_content"  android:layout_weight="1"
-                        android:layout_height="wrap_content"  android:text="LED3"   android:id="@+id/button4" />
+                        android:layout_height="wrap_content"  android:text="LED3"   android:id="@+id/buttonLED1" />
                     <Button  android:layout_width="wrap_content"  android:layout_weight="1"
-                        android:layout_height="wrap_content"    android:text="LED4"  android:id="@+id/button3" />
+                        android:layout_height="wrap_content"    android:text="LED4"  android:id="@+id/buttonLED1" />
 
                 </LinearLayout>
 
