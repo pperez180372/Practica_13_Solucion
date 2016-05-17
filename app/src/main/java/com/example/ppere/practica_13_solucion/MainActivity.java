@@ -293,12 +293,6 @@ public class MainActivity extends AppCompatActivity {
         Mx=60;
 
 
-
-        // crear los listener para los botones
-
-
-
-
         // hilo de subscripción se crea y se queda dormido esperando conexiones la IP debe ser pública o accesible
 
         new Thread(new Runnable() {
@@ -342,8 +336,6 @@ public class MainActivity extends AppCompatActivity {
                                 } catch (IOException e1) {
                                     e1.printStackTrace();
                                 }
-                                //String datos = entrada.readLine();
-
                                 //System.out.println("Fin de lectura");
                                 JSONObject jObject = null;
                                 try {
@@ -374,12 +366,6 @@ public class MainActivity extends AppCompatActivity {
 
                                     if (Subsnameentity!=null)
                                     {
-                                        /*runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                //((TextView)  findViewById(R.id.editResultado)).setText(nameentity);
-                                            }
-                                        });*/
 
                                         if (name.contains(Subsnameentity))
                                         {
@@ -393,17 +379,6 @@ public class MainActivity extends AppCompatActivity {
 
                                                         final double va = ca.getDouble("value");
                                                         nuevamuestra((float)va);
-
-                                           /* runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    EditText t= (EditText)  findViewById(R.id.editTemperatura);
-
-                                                    t.setText("" + va);
-
-                                                }
-                                            });*/
-
 
                                                     }
 
@@ -611,13 +586,8 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     public void run() {
 
-                        /*TextView t= (TextView)  findViewById(R.id.editTemperatura);
-                        t.setText("" + datum);
-                        t= (TextView)  findViewById(R.id.editnmuestras);
-                        t.setText("" + num_muestrum);*/
                         FrameLayout ll = (FrameLayout) findViewById(R.id.Grafica);
                         ll.setBackgroundDrawable(BitmapD_1);
-                        // ll.postInvalidate();
 
                     }
                 });
@@ -625,14 +595,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                      /*  TextView t= (TextView)  findViewById(R.id.editTemperatura);
-                        t.setText("" + datum);
-                        t= (TextView)  findViewById(R.id.editnmuestras);
-                        t.setText("" + num_muestrum);*/
                         FrameLayout ll = (FrameLayout) findViewById(R.id.Grafica);
                         ll.setBackgroundDrawable(BitmapD_2);
-
-//                     ll.postInvalidate();
 
                     }
                 });
@@ -657,9 +621,7 @@ public class MainActivity extends AppCompatActivity {
             // Only display the first 500 characters of the retrieved
             // web page content.
             int len = 500;
-            // View rootView = findViewById(R.layout.fragment_main);
 
-           // HttpUriRequest req = (HttpUriRequest) urls[0];
             String nameresource=(String) urls[0];
             int pos=nameresource.indexOf(".");
 
@@ -670,26 +632,9 @@ public class MainActivity extends AppCompatActivity {
 
             imprimirln(""+pos+" "+nameentity+"."+nameattribute);
 
-
-
-
-            EditText tEntidad;
-            TextView tHumedad;
-            TextView tTemperatura;
-/*
-            tEntidad = (EditText) findViewById(R.id.editEntidad);
-            //tHumedad=  (EditText)  rootView.findViewById(R.id.editHumedad);
-            tTemperatura=  (TextView)  findViewById(R.id.editTemperatura);*/
-
-            //String username = tuser.getText().toString(); //"Android_SEU_3n5_1";//
-            //String passwd = tpassword.getText().toString(); // "sensor";//
-            //String domain = tdomain.getText().toString(); // "Asignatura SEU";
-
             String HeaderAccept = "application/json";
             String HeaderContent = "application/json";
             String payload = "{\"entities\": [{\"type\": \"Sensor\",\"isPattern\": \"false\",\"id\": \""+nameentity+"\"}]}";
-            // String encodedData = URLEncoder.encode(payload, "UTF-8");
-            // String encodedData = payload;
             String leng = null;
             String resp=        "none";
 
@@ -759,14 +704,6 @@ public class MainActivity extends AppCompatActivity {
                                     final double va = ca.getDouble("value");
                                     nuevamuestra((float) va);
                                     imprimirln(nameentity+"."+nameattribute+"="+ (float) va);
-                                    /*runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            ((TextView)  findViewById(R.id.editTemperatura)).setText("" + va);
-
-                                        }
-                                    });*/
-
 
                                 }
 
@@ -807,14 +744,6 @@ public class MainActivity extends AppCompatActivity {
 
             return resp;
         }
-/*
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-            res=result;
-            TextView ttoken =   (TextView)  findViewById(R.id.editResultado);
-            ttoken.setText(result);
-        }*/
     }
 
 
@@ -848,26 +777,11 @@ public class MainActivity extends AppCompatActivity {
 
             imprimirln("" + pos + " " + nameentity + ".LED1="+LED1_ST+" "+ ".LED2="+LED2_ST+" "+ ".LED3="+LED3_ST+" "+ ".LED4="+LED4_ST+" ");
 
-
-            EditText tEntidad;
-            TextView tHumedad;
-            TextView tTemperatura;
-/*
-            tEntidad = (EditText) findViewById(R.id.editEntidad);
-            //tHumedad=  (EditText)  rootView.findViewById(R.id.editHumedad);
-            tTemperatura=  (TextView)  findViewById(R.id.editTemperatura);*/
-
-            //String username = tuser.getText().toString(); //"Android_SEU_3n5_1";//
-            //String passwd = tpassword.getText().toString(); // "sensor";//
-            //String domain = tdomain.getText().toString(); // "Asignatura SEU";
-
             String HeaderAccept = "application/json";
             String HeaderContent = "application/json";
             String payload_updateContext = "{ \"contextElements\": [{\"type\": \"Sensor\", \"isPattern\": \"false\",\"id\": \""+nameentity+"\",\"attributes\": [{\"name\":\"LEDS\",\"type\": \"integer\",\"value\": \""+LED4_ST+LED3_ST+LED2_ST+LED1_ST+"\"}]}],\"updateAction\": \"APPEND\"}";
             imprimirln(payload_updateContext);
 
-            // String encodedData = URLEncoder.encode(payload, "UTF-8");
-            // String encodedData = payload;
             String leng = null;
             String resp=        "none";
 
@@ -938,14 +852,6 @@ public class MainActivity extends AppCompatActivity {
                                     final double va = ca.getDouble("value");
                                     nuevamuestra((float) va);
                                     imprimirln(nameentity + "." + nameattribute + "=" + (float) va);
-                                    /*runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            ((TextView)  findViewById(R.id.editTemperatura)).setText("" + va);
-
-                                        }
-                                    });*/
-
 
                                 }
 
@@ -986,14 +892,6 @@ public class MainActivity extends AppCompatActivity {
 
             return resp;
         }
-/*
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-            res=result;
-            TextView ttoken =   (TextView)  findViewById(R.id.editResultado);
-            ttoken.setText(result);
-        }*/
     }
 
     class unsubscribeContextTask extends AsyncTask<String, Void, String> {
@@ -1005,18 +903,11 @@ public class MainActivity extends AppCompatActivity {
             Map<String, List<String>> rr;
             String res = "";
             InputStream is = null;
-            // Only display the first 500 characters of the retrieved
-            // web page content.
             int len = 500;
-            // View rootView = findViewById(R.layout.fragment_main);
-
-
 
             String HeaderAccept = "application/json";
             String HeaderContent = "application/json";
             String payload =  "{\"subscriptionId\" : \""+urls[0]+"\"}";
-            // String encodedData = URLEncoder.encode(payload, "UTF-8");
-            // String encodedData = payload;
             String leng = null;
             try {
                 leng = Integer.toString(payload.getBytes("UTF-8").length);
@@ -1085,29 +976,10 @@ public class MainActivity extends AppCompatActivity {
                         final String err= jo.getString("reasonPhrase");
                         imprimirln(err);
 
-                        /*runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ((TextView)  findViewById(R.id.editIdSubscripcion)).setText(err);
-
-
-                            }
-                        });
-*/
-
-
                     } catch (JSONException e) {
 
                         imprimirln("Error parsing json");
-                        /*runOnUiThread(new Runnable() {
-                            @Override
 
-
-                            public void run() {
-                                ((TextView)  findViewById(R.id.editIdSubscripcion)).setText("Error parsing json");
-
-                            }
-                        });*/
                         e.printStackTrace();
                     }
 
@@ -1144,9 +1016,6 @@ public class MainActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-           /* res=result;
-            TextView ttoken =   (TextView)  findViewById(R.id.editResultado);
-            ttoken.setText(result);*/
         }
     }
 
@@ -1159,17 +1028,7 @@ public class MainActivity extends AppCompatActivity {
             Map<String, List<String>> rr;
             String res = "";
             InputStream is = null;
-            // Only display the first 500 characters of the retrieved
-            // web page content.
             int len = 500;
-            // View rootView = findViewById(R.layout.fragment_main);
-
-
-            EditText tEntidad;
-            TextView tHumedad;
-            TextView tTemperatura;
-
-            // HttpUriRequest req = (HttpUriRequest) urls[0];
             String nameresource=(String) urls[0];
             int pos=nameresource.indexOf(".");
 
@@ -1254,15 +1113,6 @@ public class MainActivity extends AppCompatActivity {
                         SubsID=jo.getString("subscriptionId");
                         final String subsIDl = jo.getString("subscriptionId");
                         imprimirln(subsIDl);
-
-                        /*runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ((TextView) findViewById(R.id.editIdSubscripcion)).setText(subsID);
-
-
-                            }
-                        });*/
 
 
                     } catch (JSONException e) {
