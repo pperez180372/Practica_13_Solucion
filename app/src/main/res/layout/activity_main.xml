@@ -24,11 +24,18 @@
 
             <LinearLayout
 
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="@dimen/rellenodi">
+
 
                 <LinearLayout
 
@@ -109,6 +116,20 @@
                 </LinearLayout>
 
 
+                </LinearLayout>
+                <LinearLayout
+
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/border"
+                    android:padding="@dimen/rellenodi">
+                    <ToggleButton  android:layout_width="wrap_content"  android:layout_weight="1"
+                        android:layout_height="wrap_content"  android:textOff="SteelSkin"
+                        android:textOn="SteelSkin" android:id="@+id/LOGIN"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
 
             </LinearLayout>
             <LinearLayout
@@ -138,12 +159,13 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Room1"
+                        android:text="SensorSEU27.temperature"
                         android:id="@+id/textView_rr_name"
                         android:layout_weight="1"
                         android:textSize="14dp"
                         android:paddingBottom="0dp"
                         android:background="#ffffff" />
+
 
                 </LinearLayout>
                 <LinearLayout
@@ -154,10 +176,9 @@
 
                     <Button  android:layout_width="wrap_content"    android:layout_weight="1"
                         android:layout_height="wrap_content"   android:text="Actualiza" android:id="@+id/buttonActualize" />
-                    <Button  android:layout_width="wrap_content"  android:layout_weight="1"
-                        android:layout_height="wrap_content"   android:text="Subs"   android:id="@+id/buttonSubscribe" />
-                    <Button    android:layout_width="wrap_content"  android:layout_weight="1"
-                        android:layout_height="wrap_content"  android:text="Unsubs"   android:id="@+id/buttonUnsubscribe" />
+                    <ToggleButton  android:layout_width="wrap_content"  android:layout_weight="1"
+                        android:layout_height="wrap_content"  android:textOff="Subscripción"
+                        android:textOn="Subscripción" android:id="@+id/buttonSubscribe" />
 
                 </LinearLayout>
                 <FrameLayout
@@ -195,8 +216,8 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Room1"
-                        android:id="@+id/textView_rr_name"
+                        android:text="SensorSEU27"
+                        android:id="@+id/textView_rr_led_name"
                         android:layout_weight="1"
                         android:textSize="14dp"
                         android:paddingTop="0dp"
@@ -211,14 +232,21 @@
                     android:layout_height="wrap_content"
                     android:showDividers="middle">
 
-                    <Button  android:layout_width="wrap_content"    android:layout_weight="1"
-                        android:layout_height="wrap_content"   android:text="LED1" android:id="@+id/buttonLED1" />
-                    <Button  android:layout_width="wrap_content"  android:layout_weight="1"
-                        android:layout_height="wrap_content"   android:text="LED2"   android:id="@+id/buttonLED2" />
-                    <Button    android:layout_width="wrap_content"  android:layout_weight="1"
-                        android:layout_height="wrap_content"  android:text="LED3"   android:id="@+id/buttonLED1" />
-                    <Button  android:layout_width="wrap_content"  android:layout_weight="1"
-                        android:layout_height="wrap_content"    android:text="LED4"  android:id="@+id/buttonLED1" />
+                    <ToggleButton  android:layout_width="wrap_content"    android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textOff="LED1 "
+                        android:textOn="LED1"
+                        android:text="LED1"   android:id="@+id/buttonLED1" />
+
+                    <ToggleButton  android:layout_width="wrap_content"  android:layout_weight="1"
+                        android:layout_height="wrap_content"     android:textOff="LED2 "
+                        android:textOn="LED2" android:id="@+id/buttonLED2" />
+                    <ToggleButton    android:layout_width="wrap_content"  android:layout_weight="1"
+                        android:layout_height="wrap_content"     android:textOff="LED3 "
+                        android:textOn="LED3"   android:id="@+id/buttonLED3" />
+                    <ToggleButton  android:layout_width="wrap_content"  android:layout_weight="1"
+                        android:layout_height="wrap_content"       android:textOff="LED4"
+                        android:textOn="LED4" android:id="@+id/buttonLED4" />
 
                 </LinearLayout>
 
@@ -236,6 +264,8 @@
                 <LinearLayout android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
+
+
                     <TextView android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Titulo_Estado"

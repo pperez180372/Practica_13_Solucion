@@ -4,8 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
- //   public unsubscribeContextTask ayy;
-  //  public subscribeContextTask ayyy;
 
+    String SubsID;
+    String Subsnameentity;
+    String Subsnameattribute;
 
-    String nameentity;
     int puerto_de_escucha=54545;
     ServerSocket sk;
 
@@ -75,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    Button Botonsubscribe;
+    ToggleButton Botonsubscribe;
     Button Botonactualize;
-    Button Botonunsubscribe;
-    Button LED1,LED2,LED3,LED4;
+
+    ToggleButton LED1,LED2,LED3,LED4;
 
 
 
@@ -93,26 +96,175 @@ public class MainActivity extends AppCompatActivity {
 
         Botonactualize = (Button) findViewById(R.id.buttonActualize);
         Botonactualize.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                nameentity=((TextView)(findViewById(R.id.textView_rr_name))).getText().toString();
-
-                    QueryContextTask ay=new QueryContextTask();
-                    ay.execute(nameentity);
+            public void onClick(View v) {
+                String nameresource = ((TextView) (findViewById(R.id.textView_rr_name))).getText().toString();
+                QueryContextTask ay = new QueryContextTask();
+                ay.execute(nameresource);
                 // cuando termine de ejecutarse la clase será destruida si ya no tiene referencias, por ejemplo la primera de dos ejecuciones.
+            }
+
+            ;
+        });
+
+        Botonsubscribe = (ToggleButton) findViewById(R.id.buttonSubscribe);
+        Botonsubscribe.setOnClickListener(               new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ToggleButton bt= (ToggleButton) v;
+                if (!(bt.isChecked())) {
+                    imprimirln("eliminar subscripcion");
+                    unsubscribeContextTask ayy= new unsubscribeContextTask();
+                    ayy.execute(SubsID);
+                }
+                else {
+
+                    String nameresource = ((TextView) (findViewById(R.id.textView_rr_name))).getText().toString();
+                    subscribeContextTask ayyy= new subscribeContextTask();
+                    ayyy.execute(nameresource);
+
+                }
+
             };
         });
 
-        LED1= (Button) findViewById(R.id.buttonLED1);
+
+        LED1= (ToggleButton) findViewById(R.id.buttonLED1);
         LED1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                nameentity=((TextView)(findViewById(R.id.textView_rr_name))).getText().toString();
+
+                String LED1_ST,LED2_ST,LED3_ST,LED4_ST;
+                ToggleButton LED1=((ToggleButton)(findViewById(R.id.buttonLED1)));
+                ToggleButton LED2=((ToggleButton)(findViewById(R.id.buttonLED2)));
+                ToggleButton LED3=((ToggleButton)(findViewById(R.id.buttonLED3)));
+                ToggleButton LED4=((ToggleButton)(findViewById(R.id.buttonLED4)));
+                String nameentity=((TextView)(findViewById(R.id.textView_rr_led_name))).getText().toString();
+
+                if (LED1.isChecked())
+                    LED1_ST="1";
+                else
+                    LED1_ST="0";
+
+                if (LED2.isChecked())
+                    LED2_ST="1";
+                else
+                    LED2_ST="0";
+                if (LED3.isChecked())
+                    LED3_ST="1";
+                else
+                    LED3_ST="0";
+                if (LED4.isChecked())
+                    LED4_ST="1";
+                else
+                    LED4_ST="0";
 
                 updateContextTask ay=new updateContextTask();
-                ay.execute(nameentity);
-                // cuando termine de ejecutarse la clase será destruida si ya no tiene referencias, por ejemplo la primera de dos ejecuciones.
+                ay.execute(nameentity,LED1_ST,LED2_ST,LED3_ST,LED4_ST);
+
             };
         });
 
+        LED2= (ToggleButton) findViewById(R.id.buttonLED2);
+        ((ToggleButton) findViewById(R.id.buttonLED2)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String LED1_ST,LED2_ST,LED3_ST,LED4_ST;
+                ToggleButton LED1=((ToggleButton)(findViewById(R.id.buttonLED1)));
+                ToggleButton LED2=((ToggleButton)(findViewById(R.id.buttonLED2)));
+                ToggleButton LED3=((ToggleButton)(findViewById(R.id.buttonLED3)));
+                ToggleButton LED4=((ToggleButton)(findViewById(R.id.buttonLED4)));
+                String nameentity=((TextView)(findViewById(R.id.textView_rr_led_name))).getText().toString();
+
+                if (LED1.isChecked())
+                    LED1_ST="1";
+                else
+                    LED1_ST="0";
+
+                if (LED2.isChecked())
+                    LED2_ST="1";
+                else
+                    LED2_ST="0";
+                if (LED3.isChecked())
+                    LED3_ST="1";
+                else
+                    LED3_ST="0";
+                if (LED4.isChecked())
+                    LED4_ST="1";
+                else
+                    LED4_ST="0";
+
+                updateContextTask ay=new updateContextTask();
+                ay.execute(nameentity,LED1_ST,LED2_ST,LED3_ST,LED4_ST);
+
+            }
+            ;
+        });
+        LED3= (ToggleButton) findViewById(R.id.buttonLED3);
+        ((ToggleButton) findViewById(R.id.buttonLED3)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String LED1_ST,LED2_ST,LED3_ST,LED4_ST;
+                ToggleButton LED1=((ToggleButton)(findViewById(R.id.buttonLED1)));
+                ToggleButton LED2=((ToggleButton)(findViewById(R.id.buttonLED2)));
+                ToggleButton LED3=((ToggleButton)(findViewById(R.id.buttonLED3)));
+                ToggleButton LED4=((ToggleButton)(findViewById(R.id.buttonLED4)));
+                String nameentity=((TextView)(findViewById(R.id.textView_rr_led_name))).getText().toString();
+
+                if (LED1.isChecked())
+                    LED1_ST="1";
+                else
+                    LED1_ST="0";
+
+                if (LED2.isChecked())
+                    LED2_ST="1";
+                else
+                    LED2_ST="0";
+                if (LED3.isChecked())
+                    LED3_ST="1";
+                else
+                    LED3_ST="0";
+                if (LED4.isChecked())
+                    LED4_ST="1";
+                else
+                    LED4_ST="0";
+
+                updateContextTask ay=new updateContextTask();
+                ay.execute(nameentity,LED1_ST,LED2_ST,LED3_ST,LED4_ST);
+
+            };
+        });
+        LED4= (ToggleButton) findViewById(R.id.buttonLED4);
+        ((ToggleButton) findViewById(R.id.buttonLED4)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                String LED1_ST,LED2_ST,LED3_ST,LED4_ST;
+                ToggleButton LED1=((ToggleButton)(findViewById(R.id.buttonLED1)));
+                ToggleButton LED2=((ToggleButton)(findViewById(R.id.buttonLED2)));
+                ToggleButton LED3=((ToggleButton)(findViewById(R.id.buttonLED3)));
+                ToggleButton LED4=((ToggleButton)(findViewById(R.id.buttonLED4)));
+                String nameentity=((TextView)(findViewById(R.id.textView_rr_led_name))).getText().toString();
+
+                if (LED1.isChecked())
+                    LED1_ST="1";
+                else
+                    LED1_ST="0";
+
+                if (LED2.isChecked())
+                    LED2_ST="1";
+                else
+                    LED2_ST="0";
+                if (LED3.isChecked())
+                    LED3_ST="1";
+                else
+                    LED3_ST="0";
+                if (LED4.isChecked())
+                    LED4_ST="1";
+                else
+                    LED4_ST="0";
+
+                updateContextTask ay=new updateContextTask();
+                ay.execute(nameentity,LED1_ST,LED2_ST,LED3_ST,LED4_ST);
+
+            };
+        });
 
         /* crea el canvas para poder dibujar la gráfica */
 
@@ -151,7 +303,6 @@ public class MainActivity extends AppCompatActivity {
 
         new Thread(new Runnable() {
             public void run() {
-                // cliente echo
 
                 while (true)
                 {
@@ -193,26 +344,44 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 //String datos = entrada.readLine();
 
-                                System.out.println("Fin de lectura");
+                                //System.out.println("Fin de lectura");
                                 JSONObject jObject = null;
                                 try {
                                     jObject = new JSONObject(sbj.toString());
+
+
+                                    String IDSubs_rcv = jObject.getString("subscriptionId");
+                                    imprimirln("new conection: " + IDSubs_rcv);
+
+                                    if (SubsID!=null)
+                                    {
+                                        imprimirln("Subscripcion Act: " + SubsID);
+                                        if (!(SubsID.matches(IDSubs_rcv)))
+                                        {
+                                            imprimirln("eliminar subscripción "+IDSubs_rcv);
+                                            unsubscribeContextTask ayy= new unsubscribeContextTask();
+                                            ayy.execute(IDSubs_rcv);
+
+                                        }
+                                    }
+
 
                                     JSONArray jArray = jObject.getJSONArray("contextResponses");
                                     JSONObject c = jArray.getJSONObject(0);
                                     JSONObject jo = c.getJSONObject("contextElement");
                                     String name = jo.getString("id");
 
-                                    if (nameentity!=null)
+
+                                    if (Subsnameentity!=null)
                                     {
-                                        runOnUiThread(new Runnable() {
+                                        /*runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
                                                 //((TextView)  findViewById(R.id.editResultado)).setText(nameentity);
                                             }
-                                        });
+                                        });*/
 
-                                        if (name.contains(nameentity))
+                                        if (name.contains(Subsnameentity))
                                         {
 
                                             JSONArray jArrayattr = jo.getJSONArray("attributes");
@@ -220,7 +389,7 @@ public class MainActivity extends AppCompatActivity {
                                                 try {
                                                     JSONObject ca = jArrayattr.getJSONObject(i);
 
-                                                    if (ca.getString("name").contains("temperature")) {
+                                                    if (ca.getString("name").contains(Subsnameattribute)) {
 
                                                         final double va = ca.getDouble("value");
                                                         nuevamuestra((float)va);
@@ -499,7 +668,7 @@ public class MainActivity extends AppCompatActivity {
             String nameattribute = (String) urls[0].substring(pos+1);
             String nameentity= (String) urls[0].substring(0, pos);
 
-            imprimirln(""+pos+" "+nameentity+"  "+nameattribute);
+            imprimirln(""+pos+" "+nameentity+"."+nameattribute);
 
 
 
@@ -530,7 +699,6 @@ public class MainActivity extends AppCompatActivity {
                 OutputStreamWriter wr = null;
                 BufferedReader rd = null;
                 StringBuilder sb = null;
-
 
                 URL url = null;
 
@@ -664,18 +832,21 @@ public class MainActivity extends AppCompatActivity {
             int len = 500;
             // View rootView = findViewById(R.layout.fragment_main);
 
+            String nameentity=urls[0];
+            String LED1_ST=urls[1];
+            String LED2_ST=urls[2];
+            String LED3_ST=urls[3];
+            String LED4_ST=urls[4];
+
+            String nameattribute="LED1";
             // HttpUriRequest req = (HttpUriRequest) urls[0];
-            String nameresource=(String) urls[0];
-            int pos=nameresource.indexOf(".");
-
-            if (pos<0) {imprimirln("un recurso consiste en Entidad.Atributo");return "un recurso consiste en Entidad.Atributo";}
-
-            String nameattribute = (String) urls[0].substring(pos+1);
-            String nameentity= (String) urls[0].substring(0, pos);
-
-            imprimirln(""+pos+" "+nameentity+"  "+nameattribute);
+            int pos=nameentity.indexOf(".");
+            if (pos>=0) {imprimirln("La entidad sin atributos");return "La entidad sin atributos";}
+            String nameattribute_par = "LED";
 
 
+
+            imprimirln("" + pos + " " + nameentity + ".LED1="+LED1_ST+" "+ ".LED2="+LED2_ST+" "+ ".LED3="+LED3_ST+" "+ ".LED4="+LED4_ST+" ");
 
 
             EditText tEntidad;
@@ -692,14 +863,16 @@ public class MainActivity extends AppCompatActivity {
 
             String HeaderAccept = "application/json";
             String HeaderContent = "application/json";
-            String payload = "{\"entities\": [{\"type\": \"Sensor\",\"isPattern\": \"false\",\"id\": \""+nameentity+"\"}]}";
+            String payload_updateContext = "{ \"contextElements\": [{\"type\": \"Sensor\", \"isPattern\": \"false\",\"id\": \""+nameentity+"\",\"attributes\": [{\"name\":\"LEDS\",\"type\": \"integer\",\"value\": \""+LED4_ST+LED3_ST+LED2_ST+LED1_ST+"\"}]}],\"updateAction\": \"APPEND\"}";
+            imprimirln(payload_updateContext);
+
             // String encodedData = URLEncoder.encode(payload, "UTF-8");
             // String encodedData = payload;
             String leng = null;
             String resp=        "none";
 
             try {
-                leng = Integer.toString(payload.getBytes("UTF-8").length);
+                leng = Integer.toString(payload_updateContext.getBytes("UTF-8").length);
 
                 OutputStreamWriter wr = null;
                 BufferedReader rd = null;
@@ -708,7 +881,7 @@ public class MainActivity extends AppCompatActivity {
 
                 URL url = null;
 
-                url = new URL("http://pperez-seu-or.disca.upv.es:1026/v1/queryContext");
+                url = new URL("http://pperez-seu-or.disca.upv.es:1026/v1/updateContext");
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10000); // miliseconds
@@ -722,7 +895,7 @@ public class MainActivity extends AppCompatActivity {
                 conn.setDoOutput(true);
 
                 OutputStream os = conn.getOutputStream();
-                os.write(payload.getBytes("UTF-8"));
+                os.write(payload_updateContext.getBytes("UTF-8"));
                 os.flush();
                 os.close();
 
@@ -821,6 +994,304 @@ public class MainActivity extends AppCompatActivity {
             TextView ttoken =   (TextView)  findViewById(R.id.editResultado);
             ttoken.setText(result);
         }*/
+    }
+
+    class unsubscribeContextTask extends AsyncTask<String, Void, String> {
+
+        String res;
+
+        protected String doInBackground(String... urls) {
+
+            Map<String, List<String>> rr;
+            String res = "";
+            InputStream is = null;
+            // Only display the first 500 characters of the retrieved
+            // web page content.
+            int len = 500;
+            // View rootView = findViewById(R.layout.fragment_main);
+
+
+
+            String HeaderAccept = "application/json";
+            String HeaderContent = "application/json";
+            String payload =  "{\"subscriptionId\" : \""+urls[0]+"\"}";
+            // String encodedData = URLEncoder.encode(payload, "UTF-8");
+            // String encodedData = payload;
+            String leng = null;
+            try {
+                leng = Integer.toString(payload.getBytes("UTF-8").length);
+
+                OutputStreamWriter wr = null;
+                BufferedReader rd = null;
+                StringBuilder sb = null;
+
+
+                URL url = null;
+
+                url = new URL("http://pperez-seu-or.disca.upv.es:1026/v1/unsubscribeContext");
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(10000 ); // miliseconds
+                conn.setConnectTimeout(15000 );
+                conn.setRequestMethod("POST");
+
+                conn.setRequestProperty("Accept", HeaderAccept);
+                conn.setRequestProperty("Content-type", HeaderContent);
+                //conn.setRequestProperty("Fiware-Service", HeaderService);
+                conn.setRequestProperty("Content-Length", leng);
+                conn.setDoOutput(true);
+
+                OutputStream os = conn.getOutputStream();
+                os.write(payload.getBytes("UTF-8"));
+                os.flush();
+                os.close();
+
+
+                int rc = conn.getResponseCode();
+                String resp = conn.getContentEncoding();
+                is = conn.getInputStream();
+
+                if (rc == 200) {
+
+                    resp = "OK";
+
+
+                    if (SubsID.matches(urls[0]))
+                    {
+                        SubsID=null;
+                        Subsnameentity=null;
+                        Subsnameattribute=null;
+
+                    }
+
+                    //read the result from the server
+                    rd = new BufferedReader(new InputStreamReader(is));
+                    sb = new StringBuilder();
+
+                    String line = null;
+                    while ((line = rd.readLine()) != null)
+                    {
+                        sb.append(line + "\n");
+                    }
+                    String result = sb.toString();
+
+
+                    JSONObject jObject = null;
+                    try {
+                        jObject = new JSONObject(result);
+
+                        JSONObject jo = jObject.getJSONObject("statusCode");
+
+                        final String err= jo.getString("reasonPhrase");
+                        imprimirln(err);
+
+                        /*runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ((TextView)  findViewById(R.id.editIdSubscripcion)).setText(err);
+
+
+                            }
+                        });
+*/
+
+
+                    } catch (JSONException e) {
+
+                        imprimirln("Error parsing json");
+                        /*runOnUiThread(new Runnable() {
+                            @Override
+
+
+                            public void run() {
+                                ((TextView)  findViewById(R.id.editIdSubscripcion)).setText("Error parsing json");
+
+                            }
+                        });*/
+                        e.printStackTrace();
+                    }
+
+
+
+
+
+
+                } else {
+                    resp = "ERROR de conexión";
+                    System.out.println("http response code error: " + rc + "\n");
+
+                }
+
+
+
+                return resp;
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            return "error";
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+           /* res=result;
+            TextView ttoken =   (TextView)  findViewById(R.id.editResultado);
+            ttoken.setText(result);*/
+        }
+    }
+
+    class subscribeContextTask extends AsyncTask<String, Void, String> {
+
+        String res;
+
+        protected String doInBackground(String... urls) {
+
+            Map<String, List<String>> rr;
+            String res = "";
+            InputStream is = null;
+            // Only display the first 500 characters of the retrieved
+            // web page content.
+            int len = 500;
+            // View rootView = findViewById(R.layout.fragment_main);
+
+
+            EditText tEntidad;
+            TextView tHumedad;
+            TextView tTemperatura;
+
+            // HttpUriRequest req = (HttpUriRequest) urls[0];
+            String nameresource=(String) urls[0];
+            int pos=nameresource.indexOf(".");
+
+            if (pos<0) {imprimirln("un recurso consiste en Entidad.Atributo");return "un recurso consiste en Entidad.Atributo";}
+
+            String nameattribute = (String) urls[0].substring(pos+1);
+            String nameentity= (String) urls[0].substring(0, pos);
+
+            imprimirln(""+pos+" "+nameentity+"."+nameattribute);
+
+
+            String HeaderAccept = "application/json";
+            String HeaderContent = "application/json";
+
+            if (sk == null)
+                return "error socket no abierto";
+
+            String urlEs = "http://" + sk.getInetAddress().getHostAddress() + ":" + sk.getLocalPort();
+            String payload = "{\"entities\" : [{\"type\": \"Sensor\",\"isPattern\": \"false\",\"id\": \""+nameentity+"\"}],\"attributes\": [\"temperature\"], \"reference\": \"" + urlEs + "\", \"duration\": \"P1M\",\"notifyConditions\": [{    \"type\": \"ONCHANGE\", \"condValues\": [\"temperature\" ] } ], \"throttling\": \"PT5S\"}";
+            imprimirln(payload);
+            // String encodedData = URLEncoder.encode(payload, "UTF-8");
+            // String encodedData = payload;
+            String leng = null;
+            try {
+                try {
+                    leng = Integer.toString(payload.getBytes("UTF-8").length);
+                } catch (UnsupportedEncodingException e1) {
+                    e1.printStackTrace();
+                }
+
+                OutputStreamWriter wr = null;
+                BufferedReader rd = null;
+                StringBuilder sb = null;
+
+
+                URL url = null;
+
+                url = new URL("http://pperez-seu-or.disca.upv.es:1026/v1/subscribeContext");
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(10000); // miliseconds
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod("POST");
+
+                conn.setRequestProperty("Accept", HeaderAccept);
+                conn.setRequestProperty("Content-type", HeaderContent);
+                //conn.setRequestProperty("Fiware-Service", HeaderService);
+                conn.setRequestProperty("Content-Length", leng);
+                conn.setDoOutput(true);
+
+                OutputStream os = conn.getOutputStream();
+                os.write(payload.getBytes("UTF-8"));
+                os.flush();
+                os.close();
+
+
+                int rc = conn.getResponseCode();
+                String resp = conn.getContentEncoding();
+                is = conn.getInputStream();
+
+                if (rc == 200) {
+
+                    resp = "OK";
+                    //read the result from the server
+                    rd = new BufferedReader(new InputStreamReader(is));
+                    sb = new StringBuilder();
+
+                    String line = null;
+                    while ((line = rd.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    String result = sb.toString();
+
+
+                    JSONObject jObject = null;
+                    try {
+                        jObject = new JSONObject(result);
+
+                        JSONObject jo = jObject.getJSONObject("subscribeResponse");
+                        Subsnameentity= nameentity;
+                        Subsnameattribute=nameattribute;
+                        SubsID=jo.getString("subscriptionId");
+                        final String subsIDl = jo.getString("subscriptionId");
+                        imprimirln(subsIDl);
+
+                        /*runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ((TextView) findViewById(R.id.editIdSubscripcion)).setText(subsID);
+
+
+                            }
+                        });*/
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                } else {
+                    resp = "ERROR de conexión";
+                    System.out.println("http response code error: " + rc + "\n");
+
+                }
+
+                return resp;
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            return "error";
+        }
     }
 
 
